@@ -8,7 +8,7 @@ agent any
 stages {
 stage('Cloning Git') {
 steps {
-git([url: 'https://github.com/KanchanSoni16/helloword-java.git', branch: 'master', credentialsId: 'github-accesstoken'])
+git([url: 'https://github.com/KanchanSoni16/helloword-java.git', branch: 'main', credentialsId: 'github-accesstoken'])
 }
 }
 stage('Building image') {

@@ -15,6 +15,7 @@ git([url: 'https://github.com/KanchanSoni16/helloword-java.git', branch: 'main',
 stage('Building image') {
 steps{
 script {
+  sh 'docker build -t kanchansoni/test .'
 dockerImage = docker.build imagename
 }
 }

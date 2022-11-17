@@ -41,7 +41,7 @@ sh "docker rmi $imagename:latest"
 
 
 pipeline {
-    agent any
+  agent {lable 'demo17'}
 
     stages {
         stage('Build') {

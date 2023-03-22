@@ -18,7 +18,7 @@ pipeline {
     }
 }
 
-
+---------------------------------------------------------------
 
 pipeline {
   agent {label 'demo17'}
@@ -46,4 +46,40 @@ pipeline {
             emailext body: 'this is test body', recipientProviders: [buildUser()], subject: 'This is test mail.', to: 'kanchanawsdemo@gmail.com'
         }
         }
+}
+
+-----------------------------------------------------------------------
+pipeline {
+    agent any
+
+    stages {
+        stage('Update Machine') {
+            steps {
+                // Update the machine
+                sh 'sudo apt-get update'
+                sh 'sudo apt-get upgrade -y'
+            }
+        }
+
+        stage('Install Maven') {
+            steps {
+                // Install Maven
+                sh 'sudo apt-get install -y maven'
+            }
+        }
+
+        stage('Git Pull') {
+            steps {
+                // Clone the repository if it doesn't exist, otherwise do a Git pull
+                git url: 'https://github.com/myorg/myrepo.git'
+            }
+        }
+
+        stage('Maven Build') {
+            steps {
+                // Run a Maven build
+                sh 'mvn clean package'
+            }
+        }
+    }
 }

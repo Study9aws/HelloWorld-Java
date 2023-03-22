@@ -1,0 +1,19 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Git Pull') {
+            steps {
+                // Clone the repository if it doesn't exist, otherwise do a Git pull
+                git url: 'https://github.com/myorg/myrepo.git'
+            }
+        }
+
+        stage('Maven Build') {
+            steps {
+                // Run a Maven build
+                sh 'mvn clean package'
+            }
+        }
+    }
+}

@@ -49,6 +49,8 @@ pipeline {
 }
 
 -----------------------------------------------------------------------
+Declarative pipeline
+-----------------------------------------------------------------------
 pipeline {
     agent any
 
@@ -81,5 +83,25 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
+    }
+}
+
+----------------------------------------------------------------------------------
+Scripted pipeline
+-------------------------------------------------------------------------------------
+
+node {
+    stage('Update Machine') {
+        sh 'sudo apt-get update'
+        sh 'sudo apt-get upgrade -y'
+    }
+
+    stage('Install Maven') {
+        sh 'sudo apt-get install -y maven'
+    }
+
+    stage('Git Pull and Maven Build') {
+        git url: 'https://github.com/myorg/myrepo.git'
+        sh 'mvn clean package'
     }
 }

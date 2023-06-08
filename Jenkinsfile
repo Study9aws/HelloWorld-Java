@@ -40,3 +40,32 @@ sh "docker rmi $imagename:latest"
 }*/
 
 
+pipeline {
+  agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building the project'
+                }
+            }
+        stage('Test') {
+            steps {
+                echo 'Testing the project'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploy the project'
+            }
+        }
+      
+    }
+      post {
+        always {
+            emailext body: 'this is test body', recipientProviders: [buildUser()], subject: 'This is test mail.', to: 'kanchanawsdemo@gmail.com'
+        }
+        }
+}
+
+
